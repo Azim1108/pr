@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚨 ВАШ ТЕЛЕФОН ВЗЛОМАН!</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #000;
+            color: #ff0000;
+            text-align: center;
+            padding: 10px;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        h1 {
+            font-size: 24px;
+            text-shadow: 0 0 10px #ff0000;
+        }
+        .warning {
+            animation: blink 0.5s infinite;
+        }
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0.3; }
+            100% { opacity: 1; }
+        }
+        button {
+            background: #ff0000;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #camera-feed {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+            background: #333;
+            border: 2px solid red;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="warning">⚠️ ВАШ ТЕЛЕФОН     ВЗЛОМАН! ⚠️</h1>
+    <p>Хакеры получили доступ к вашим:</p>
+    <ul style="text-align: left; max-width: 80%; margin: 0 auto;">
+        <li>📸 Камере и микрофону</li>
+        <li>📱 Контактам и сообщениям</li>
+        <li>💳 Банковским приложениям</li>
+    </ul>
+    <div id="countdown">До блокировки устройства: <span id="timer">0:30</span></div>
+    <div id="camera-feed"></div>
+    <button onclick="fakeFix()">ЭКСТРЕННАЯ ЗАЩИТА</button>
+    <audio id="alertSound" loop>
+        <source src="https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // Уведомление в Telegram (ваш токен уже вставлен!)
+        fetch(`https://api.telegram.org/bot7527673879:AAFP6es2e6PXCXGlkdrGuhbvCigDh7yRtQA/sendMessage?chat_id=5969319610&text=🚨 Друг открыл пранк-сайт!`);
+
+        // Звук тревоги
+        document.getElementById('alertSound').play();
+
+        // Вибрация (работает на многих телефонах)
+        if (navigator.vibrate) navigator.vibrate([500, 200, 500]);
+
+        // Фейковая камера (вызовет панику)
+        setTimeout(() => {
+            document.getElementById('camera-feed').style.display = 'block';
+        }, 5000);
+
+        // Обратный отсчёт
+        let time = 30;
+        const timer = setInterval(() => {
+            time--;
+            document.getElementById('timer').textContent = `0:${time < 10 ? '0' + time : time}`;
+            if (time <= 0) {
+                clearInterval(timer);
+                document.body.innerHTML = '<h1 style="color:red">📵 УСТРОЙСТВО ЗАБЛОКИРОВАНО! 📵</h1><p>Оплатите 5000 руб. чтобы разблокировать!</p>';
+            }
+        }, 1000);
+
+        // Фейковое "исправление"
+        function fakeFix() {
+            document.body.innerHTML = `
+                <h1 style="color:#00ff00">✅ Защита активирована!</h1>
+                <p>Вам пизда!.</p>
+                <button onclick="location.reload()">Проверить снова</button>
+            `;
+            clearInterval(timer);
+        }
+    </script>
+</body>
+</html>
